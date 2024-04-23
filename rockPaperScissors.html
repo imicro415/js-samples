@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>    
+</body>
+<script>
+function getComputerChoice () {
+    let random = Math.floor(Math.random() * 10) % 3;
+    const choice = ['rock', 'paper', 'scissors'];
+    return choice[random];
+}
+function getPlayerChoice(){
+   let choice = prompt('Rock, paper, or scissors?').toLowerCase();
+   const choices = ['rock', 'paper', 'scissors']
+   while(!choices.includes(choice)){
+        choice = prompt('Incorrect input! \nRock, paper, or scissors?').toLowerCase()
+   }
+   return choice
+}
+function playRound(player, computer){
+	if(player === 'scissors' && computer === 'rock'){
+    return 'You lose! Rock beats Scissors!'
+  } else if(player === 'scissors' && computer === 'paper'){
+    return 'You won! Scissors beats Paper!'
+  } else if(player === 'rock' && computer === 'scissors'){
+    return 'You won! Rock beats Scissors!'
+  } else if(player === 'paper' && computer === 'scissors'){
+    return 'You lose! Scissors beats Paper!'
+  } else if(player === 'paper' && computer === 'rock'){
+    return 'You won! Paper beats Rock!'
+  } else if(player === 'rock' && computer === 'paper'){
+    return 'You lose! Paper beats Rock!'
+  } else {
+    return 'This round is a draw.'
+  }
+}
+
+function playGame() { 
+    let playerWins = 0;
+    let computerWins = 0;
+  
+    for(let i = 1; i <= 5; i++) {
+        const playerSelection = getPlayerChoice();
+        const computerSelection = getComputerChoice();
+        const result = playRound(playerSelection, computerSelection);
+        if(result.includes('You won!')){
+            playerWins++;
+        } else if(result.includes('You lose!')){
+            computerWins++; 
+  	        }
+        console.log(result, `\nTotal player wins: ${playerWins}\nTotal computer wins: ${computerWins}`);
+    }
+    if(playerWins > computerWins){
+        return 'Player Wins!'
+    } else if(playerWins < computerWins){
+    return 'Computer Wins!'
+    } else if (playerWins === computerWins){
+        return 'The game is a draw.'
+    }
+}
+
+</script>
+</html>
